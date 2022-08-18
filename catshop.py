@@ -72,10 +72,10 @@ def createProduct():
     if checkFields(category,'catName',newProdCatId) == True:
         print('this category doesnt exist!')
     else:
-        products['catId'].append(newId)
+        products['prodId'].append(newId)
         products['prodName'].append(newProdName)
         products['price'].append(newProdPrice)
-        products['catId'].append(newProdCatId)
+        products['catId'].append(    category['catId'][  category['catName'].index(newProdCatId) ]  )
         print('product created')
 
 def createCust():
@@ -97,22 +97,26 @@ def createCust():
             while checkNum == True:
                 newPhoneNo = input('please enter a valid phone number')
                 checkNum = verifyNumber(newPhoneNo)
-        else:
-            customers['custId'].append(newId)
-            customers['custMail'].append(newMail)
-            customers['custPhoneNo'].append(newPhoneNo)
-            customers['billAddress'].append(newAddress)
-            customers['location'].append(newLoc)
-            customers['country'].append(newCountry)
-            print('customer created')
+        
+        customers['custId'].append(newId)
+        customers['custMail'].append(newMail)
+        customers['custPhoneNo'].append(newPhoneNo)
+        customers['billAddress'].append(newAddress)
+        customers['location'].append(newLoc)
+        customers['country'].append(newCountry)
+        print('customer created')
 
 def createOrder():
     newId = category['catId'][-1] +1
+    # print all productsID
+    print(f"Existing products IDs are: {products['prodId']}")
+    print(f"Existing products are: {products['prodName']}")
     newOrder = int(input('enter the product id: '))
     newQty = int(input('enter the quantity: '))
     newTotal = products['price'][products['prodId'].index(newOrder)]*newQty
     newCust = int(input('enter the customers id: '))
     newStatus = 'Shipping'
+    print("Order was placed!")
 
     ordersPlaced['ordId'].append(newId)
     ordersPlaced['prodId'].append(newOrder)
@@ -261,7 +265,7 @@ while True:
                 get_sales_category(category_name)
 
             if admin_opt == 5:
-                for i in range(len(category['catName'])):
+                for i in range(len(customers['location'])):
                     print(customers['location'][i] ,end=' | ' )
                 print('\n')
                 location = str(input("Please provide location from the above: "))
