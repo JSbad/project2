@@ -25,10 +25,10 @@ def checkFields(dict,field,data):
     else:
         return False
 def verifyNumber(number):
-    if len(number) != 10 or str(number).isdigit()==False:
-        return True
-    else:
+    if len(number) == 10:
         return False
+    else:
+        return True
         
 
 def verifyEmail(email):
@@ -39,9 +39,6 @@ def verifyEmail(email):
     if len(l)!=2:
         invalid = True
     else:
-        #l[0] = 'jgjhg'
-        #l[1] ='hhh.com'
-        #      =['hhh' , 'com']
         t = ('co','com','org','in')
         for x in t:
             temp = l[1].split('.')
@@ -57,12 +54,12 @@ def createCategory():
     newCatName = input('enter new category name: ')
     catDesc = input('enter category description: ')
     if checkFields(category,'catName',newCatName) == False:
-        print('this category already exists!')
+        print('This category already exists!')
     else:
         category['catId'].append(newId)
         category['catName'].append(newCatName)
         category['catDesc'].append(catDesc)
-        print('category created')
+        print('Category created!')
 
 def createProduct():
     newId = products['prodId'][-1] +1
@@ -70,13 +67,13 @@ def createProduct():
     newProdPrice = int(input('enter product price: '))
     newProdCatId = input('enter product category: ')
     if checkFields(category,'catName',newProdCatId) == True:
-        print('this category doesnt exist!')
+        print('This category does not exist!')
     else:
         products['prodId'].append(newId)
         products['prodName'].append(newProdName)
         products['price'].append(newProdPrice)
         products['catId'].append(    category['catId'][  category['catName'].index(newProdCatId) ]  )
-        print('product created')
+        print('Product created!')
 
 def createCust():
     newId = customers['custId'][len(customers['custId'])-1] +1
@@ -85,17 +82,17 @@ def createCust():
     newLoc = input('enter the city: ')
     newCountry = input('enter the country: ')
     if checkFields(customers,'custMail',newMail) == False:
-        print('this customer already exists')
+        print('This customer already exists.')
     else:
         checkMail = verifyEmail(newMail)
         if checkMail == True:
             while checkMail == True:
-                newMail = input('please enter a valid email address')
+                newMail = input('Please enter a valid email address: ')
                 checkMail = verifyEmail(newMail)
         checkNum = verifyNumber(newPhoneNo)
         if checkNum == True:
             while checkNum == True:
-                newPhoneNo = input('please enter a valid phone number')
+                newPhoneNo = input('Please enter a valid phone number: ')
                 checkNum = verifyNumber(newPhoneNo)
         
         customers['custId'].append(newId)
@@ -104,17 +101,17 @@ def createCust():
         customers['billAddress'].append(newAddress)
         customers['location'].append(newLoc)
         customers['country'].append(newCountry)
-        print('customer created')
+        print('Customer created!')
 
 def createOrder():
     newId = category['catId'][-1] +1
     # print all productsID
     print(f"Existing products IDs are: {products['prodId']}")
     print(f"Existing products are: {products['prodName']}")
-    newOrder = int(input('enter the product id: '))
+    newOrder = int(input('Enter the product id: '))
     newQty = int(input('enter the quantity: '))
     newTotal = products['price'][products['prodId'].index(newOrder)]*newQty
-    newCust = int(input('enter the customers id: '))
+    newCust = int(input('Enter the customers id: '))
     newStatus = 'Shipping'
     print("Order was placed!")
 
