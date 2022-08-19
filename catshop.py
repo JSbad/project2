@@ -1,7 +1,7 @@
 category = {'catId':[1,2,3],'catName':['food','clothing','toiletries'],
             'catDesc':['consumable non alcoholic goods','standard clothes','shampoos, deodorants and alike']}
 
-products = {'prodId':[1,2,3], 'prodName':['testShampoo','testCrisps','testTshirt'],'price':[20,13,50],'catId':[3,1,2]}
+products = {'prodId':[1,2,3], 'prodName':['Shampoo','Crisps','Tshirt'],'price':[20,13,50],'catId':[3,1,2]}
 
 customers = {'custId':[1,2,3],'custMail':['mail1@mail.com','mail2@hotmail.com','mail3@gmail.com'],
             'custPhoneNo':['07777777777','07666666666','07555555555'],
@@ -164,9 +164,9 @@ def get_sales_category(category_name):
 
     cat_id = category['catId'][cat_index]
 
-    index_in_cat_id_in_products_NOT_UNIQUE = products['catId'].index(cat_id)
+    index_in_cat_id_in_products = products['catId'].index(cat_id)
 
-    product_id = products['prodId'][index_in_cat_id_in_products_NOT_UNIQUE]
+    product_id = products['prodId'][index_in_cat_id_in_products]
 
     get_sales_productID(product_id)
 
